@@ -115,16 +115,23 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+
+#START CUSTOMIZATION
+
+#Enable VI mode for bash
 set -o vi
 
+# Lazy update function
 function update {
         sudo apt update -y && sudo apt upgrade -y;
         sudo apt autoremove -y;
         echo "Updating database.";
         sudo updatedb;
 }
+
+#Not a stolen PS1 from Luke Smith's dotfiles
 export PS1="\[$(tput bold)\]\[$(tput setaf 1)\]\[$(tput setaf 3)\]\u\[$(tput setaf 2)\]@\[$(tput setaf 4)\]\h \[$(tput setaf 5)\]\[$(tput setaf 1)\]:\[$(tput setaf 5)\]\w\[$(tput setaf 1)\]\[$(tput setaf 7)\]\\$\[$(tput sgr0)\]"
-export DOTNET_CLI_TELEMETRY_OPTOUT=1
 
 alias a="sudo apt"
 alias ai="sudo apt install"
+#END CUSTOMIZATION
