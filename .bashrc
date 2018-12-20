@@ -116,12 +116,10 @@ if ! shopt -oq posix; then
   fi
 fi
 
-#START CUSTOMIZATION
-
-#Enable VI mode for bash
+# I like vi-mode on my Bash prompt.
 set -o vi
 
-# Lazy update function
+# All-in-one update command.
 function update {
         sudo apt update -y && sudo apt upgrade -y;
         sudo apt autoremove -y;
@@ -129,9 +127,18 @@ function update {
         sudo updatedb;
 }
 
-#Not a stolen PS1 from Luke Smith's dotfiles
+# Not a shameless theft of Luke Smith's PS1. Not at all.
 export PS1="\[$(tput bold)\]\[$(tput setaf 1)\]\[$(tput setaf 3)\]\u\[$(tput setaf 2)\]@\[$(tput setaf 4)\]\h \[$(tput setaf 5)\]\[$(tput setaf 1)\]:\[$(tput setaf 5)\]\w\[$(tput setaf 1)\]\[$(tput setaf 7)\]\\$\[$(tput sgr0)\]"
+
+# I need dotnet core for a couple of projects. This tells it not to telemtry me.
+export DOTNET_CLI_TELEMETRY_OPTOUT=1
 
 alias a="sudo apt"
 alias ai="sudo apt install"
-#END CUSTOMIZATION
+# Reset pulseaudio
+alias reset-pa="pulseaudio -k; pulseaudio --start"
+# Start microphone loopback, and stop it, respectively.
+alias loopback="pactl load-module module-loopback"
+alias no-loopback="pactl unload-module module-loopback"
+# I get jittery sound from pulseaudio sometimes, this fixes it.
+alias fix-audio="pactl load-module module-loopback; sleep 1; pactl unload-module module-loopback"
