@@ -1,0 +1,5 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =3
+let g:netrw_dirhist_1='/media/jamie/My Book/Anime/Birdy the Mighty_ Decode (01-25)'
+let g:netrw_dirhist_2='/media/jamie/My Book/Anime/Birdy'
+let g:netrw_dirhist_3='/etc/systemd/user'

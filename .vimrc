@@ -52,6 +52,8 @@ set laststatus=2
 
 " Key remapping
 map <F5> :setlocal spell! spelllang=en_us<CR>
+map <F2> :NERDTree<CR>
+map <F3> :NERDTreeClose<CR>
 map <F4> :nohl<CR>
 " Map replace-all to S
 nnoremap S :%s//g<Left><Left>
