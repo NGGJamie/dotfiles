@@ -54,5 +54,8 @@ set laststatus=2
 map <F5> :setlocal spell! spelllang=en_us<CR>
 map <F2> :NERDTreeToggle<CR>
 map <F4> :nohl<CR>
+map > :bn<CR>
+map < :bp<CR>
 " Map replace-all to S
 nnoremap S :%s//g<Left><Left>
+set softtabstop=0 noexpandtab
