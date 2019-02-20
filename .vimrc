@@ -44,6 +44,8 @@ set path+=**
 " Show (partial) command in the last line of the screen.
 set showcmd
 set nostartofline
+" Disable replacing tabs with spaces
+set softtabstop=0 noexpandtab
 
 " Status line magic, when not using Airline
 set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [POS=%04l,%04v][%p%%]\ [LEN=%L]
@@ -58,4 +60,3 @@ map > :bn<CR>
 map < :bp<CR>
 " Map replace-all to S
 nnoremap S :%s//g<Left><Left>
-set softtabstop=0 noexpandtab
