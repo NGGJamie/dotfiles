@@ -1,8 +1,9 @@
-#!/usr/bin/python3.6
+#!/usr/bin/python3
 
 ############################################################################
 #                                                                          #
 #   Handles my fan speed on my GTX1080. Works surprisingly well.           #
+#   Recommended to add on startup. Can work on Windows with tweaks.        #
 #                                                                          #
 ############################################################################
 
@@ -21,7 +22,6 @@ for p in psutil.process_iter():
         exit()
 
 # Setup Regular expressions
-qf = re.compile("Fan.*: ([0-9]+) %")
 qt = re.compile("Current Temp.*: ([0-9]+) C")
 
 # Wait time, in seconds, between GPU polls. Fan is updated at this frequency as well.
@@ -38,17 +38,15 @@ def set_fan(speed):
     return call_pipe("nvidia-settings -a [fan:0]/GPUTargetFanSpeed="+str(speed))
 
 def query_gpu():
-    ret = {}
     x = call_pipe("nvidia-smi -q")
     x = x.stdout
-    ret['temp'] = int(qt.findall(x)[0])
-    ret['speed'] = int(qf.findall(x)[0])
+    ret = int(qt.findall(x)[0])
     return ret
 
 speed = 15
 while True:
     gpud = query_gpu()
-    curTemp = gpud['temp']
+    curTemp = gpud
     # Start raising speed at 30C,and max out at 75C
     st = floor((curTemp-30)*2.125)
     # Cap speed at 100% just in case things go haywire
