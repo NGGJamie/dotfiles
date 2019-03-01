@@ -15,9 +15,13 @@ HISTCONTROL=ignoreboth
 # append to the history file, don't overwrite it
 shopt -s histappend
 
+# Enable the globstar ** for recursion into directories
+shopt -s globstar
+
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
-HISTFILESIZE=2000
+# Infinite size
+HISTSIZE=
+HISTFILESIZE=
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -115,30 +119,37 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
-
-# I like vi-mode on my Bash prompt.
+# Enable VIM bindings in bash.
 set -o vi
 
-# All-in-one update command.
+# Lazy update
 function update {
         sudo apt update -y && sudo apt upgrade -y;
         sudo apt autoremove -y;
         echo "Updating database.";
         sudo updatedb;
 }
-
-# Not a shameless theft of Luke Smith's PS1. Not at all.
+# Nice colorful console
 export PS1="\[$(tput bold)\]\[$(tput setaf 1)\]\[$(tput setaf 3)\]\u\[$(tput setaf 2)\]@\[$(tput setaf 4)\]\h \[$(tput setaf 5)\]\[$(tput setaf 1)\]:\[$(tput setaf 5)\]\w\[$(tput setaf 1)\]\[$(tput setaf 7)\]\\$\[$(tput sgr0)\]"
 
-# I need dotnet core for a couple of projects. This tells it not to telemtry me.
-export DOTNET_CLI_TELEMETRY_OPTOUT=1
-
-alias a="sudo apt"
-alias ai="sudo apt install"
 # Reset pulseaudio
 alias reset-pa="pulseaudio -k; pulseaudio --start"
-# Start microphone loopback, and stop it, respectively.
+
+# Enable/disable microphone loopback
 alias loopback="pactl load-module module-loopback"
 alias no-loopback="pactl unload-module module-loopback"
-# I get jittery sound from pulseaudio sometimes, this fixes it.
+
+# Fixes my audio when/if it gets jittery
 alias fix-audio="pactl load-module module-loopback; sleep 1; pactl unload-module module-loopback"
+
+# Press a key specified X times.
+alias press="xdotool key --repeat"
+
+#Gets the X session for SSH
+alias get-x="export DISPLAY=:0"
+
+# Add Go to my path
+PATH="$PATH:/usr/lib/go-1.10/bin"
+
+# Convenient youtube-dl music downloading
+alias yt-mp3="youtube-dl --add-metadata -x --audio-quality 256k --audio-format mp3 "
