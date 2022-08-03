@@ -122,25 +122,8 @@ fi
 # Enable VIM bindings in bash.
 set -o vi
 
-# Lazy update
-function update {
-        sudo apt update -y && sudo apt upgrade -y;
-        sudo apt autoremove -y;
-        echo "Updating database.";
-        sudo updatedb;
-}
 # Nice colorful console
 export PS1="\[$(tput bold)\]\[$(tput setaf 1)\]\[$(tput setaf 3)\]\u\[$(tput setaf 2)\]@\[$(tput setaf 4)\]\h \[$(tput setaf 5)\]\[$(tput setaf 1)\]:\[$(tput setaf 5)\]\w\[$(tput setaf 1)\]\[$(tput setaf 7)\]\\$\[$(tput sgr0)\]"
-
-# Reset pulseaudio
-alias reset-pa="pulseaudio -k; pulseaudio --start"
-
-# Enable/disable microphone loopback
-alias loopback="pactl load-module module-loopback"
-alias no-loopback="pactl unload-module module-loopback"
-
-# Fixes my audio when/if it gets jittery
-alias fix-audio="pactl load-module module-loopback; sleep 1; pactl unload-module module-loopback"
 
 # Press a key specified X times.
 alias press="xdotool key --repeat"
